@@ -100,7 +100,6 @@ public class FancyButton extends LinearLayout {
 		super(context, attrs);
 		this.mContext = context;
 		scale = mContext.getResources().getDisplayMetrics().density;
-		LogUtils.DebugLog("Fancybutton 屏幕比" + scale);
 		TypedArray attrsArray = context.obtainStyledAttributes(attrs,
 				R.styleable.FancyButtonsAttrs, 0, 0);
 		initAttributsArray(attrsArray);
@@ -133,6 +132,7 @@ public class FancyButton extends LinearLayout {
 
 		} else {
 			this.removeAllViews();
+			
 			setupBackground();
 
 			ArrayList<View> views = new ArrayList<View>();

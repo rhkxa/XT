@@ -74,7 +74,7 @@ public class LoginActivity extends BaseActivity {
 	private TextView login_test;
 	private boolean isTest = false;
 	private FancyButton logo_beidou, logo_gps;
-	private String beidou = "http://app.bdgps808.com/ws/0.1/";
+	private String beidou = "http://bd.gps808.com/ws/0.1/";
 	private String gps = "http://app.gps808.com/ws/0.1/";
 
 	@Override
