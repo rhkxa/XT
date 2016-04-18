@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_backgroud"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        class="com.gps808.app.fragment.HeaderFragment" />
+
+    <EditText
+        android:id="@+id/feedback_edit"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:gravity="top"
+        android:hint="请尽量详细描述反馈，平台会在第一时间帮您解决问题……"
+        android:padding="8dp"
+        android:textColor="@color/text"
+        android:textSize="@dimen/body" />
+
+    <com.gps808.app.view.FancyButton
+        android:id="@+id/feedback_ok"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        fancy:fb_defaultColor="@color/tag_blue"
+        fancy:fb_focusColor="@color/app_blue"
+        fancy:fb_radius="2dp"
+        fancy:fb_text="确定"
+        fancy:fb_textColor="@color/white" />
+
+</LinearLayout>

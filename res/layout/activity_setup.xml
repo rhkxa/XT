@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_backgroud"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        class="com.gps808.app.fragment.HeaderFragment" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/setup_monitor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_backgroud_selector"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal"
+            android:padding="8dp" >
+
+            <com.gps808.app.view.FancyButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:clickable="false"
+                fancy:fb_defaultColor="@color/tag_blue"
+                fancy:fb_focusColor="#8cc9f8"
+                fancy:fb_iconResource="@drawable/xtd_icon_monitor"
+                fancy:fb_iconSize="24dp"
+                fancy:fb_radius="2dp"
+                fancy:fb_textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:text="监控自动刷新时间"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <TextView
+                android:id="@+id/setup_monitor_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"    
+                android:padding="2dp"
+                android:background="@drawable/shape_coners_backgroud"
+                android:text="10s"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/xtd_action_next" />
+        </LinearLayout>
+
+        <View style="@style/blackline" />
+
+        <LinearLayout
+            android:id="@+id/setup_track"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_backgroud_selector"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal"
+            android:padding="8dp" >
+
+            <com.gps808.app.view.FancyButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:clickable="false"
+                fancy:fb_defaultColor="@color/app_green"
+                fancy:fb_focusColor="#8cc9f8"
+                fancy:fb_iconResource="@drawable/xtd_icon_track"
+                fancy:fb_iconSize="24dp"
+                fancy:fb_radius="2dp"
+                fancy:fb_textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:text="跟踪自动刷新时间"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <TextView
+                android:id="@+id/setup_track_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+               android:background="@drawable/shape_coners_backgroud"
+                android:padding="2dp"
+                android:text="10s"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/xtd_action_next" />
+        </LinearLayout>
+
+        <View style="@style/blackline" />
+
+        <View
+            style="@style/blackline"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:id="@+id/reset_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_backgroud_selector"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal"
+            android:padding="8dp" >
+
+            <com.gps808.app.view.FancyButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:clickable="false"
+                fancy:fb_defaultColor="@color/app_blue"
+                fancy:fb_focusColor="#8cc9f8"
+                fancy:fb_iconResource="@drawable/xtd_icon_pass"
+                fancy:fb_iconSize="24dp"
+                fancy:fb_radius="2dp"
+                fancy:fb_textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:text="重置密码"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/xtd_action_next" />
+        </LinearLayout>
+
+        <View style="@style/blackline" />
+    </LinearLayout>
+
+    <com.gps808.app.view.FancyButton
+        android:id="@+id/exit_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        fancy:fb_defaultColor="@color/app_red"
+        fancy:fb_focusColor="#8cc9f8"
+        fancy:fb_radius="2dp"
+        fancy:fb_text="退出登录"
+        fancy:fb_textColor="@color/white" />
+
+</LinearLayout>

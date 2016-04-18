@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/goods_search_box"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:background="@drawable/corners_rect_white" >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:src="@drawable/smyk_search" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/layout_search_bar_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/full_transparent"
+                android:gravity="left|center_vertical"
+                android:hint="请输入车牌号或手机号"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:textSize="@dimen/body" />
+
+            <ImageView
+                android:id="@+id/layout_search_bar_close"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/xtd_close_gray"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/layout_search_bar_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/full_transparent"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="@color/app_blue"
+            android:textSize="@dimen/body"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

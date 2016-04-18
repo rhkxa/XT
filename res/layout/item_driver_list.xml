@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_backgroud_selector"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp" >
+
+    <com.gps808.app.view.FancyButton
+        android:id="@+id/item_driver_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        fancy:fb_defaultColor="@color/border"
+        fancy:fb_focusColor="#8cc9f8"
+        fancy:fb_iconResource="@drawable/xtd_icon_gray"
+        fancy:fb_iconSize="24dp"
+        fancy:fb_radius="2dp"
+        fancy:fb_textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/item_driver_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="个人中心"
+        android:textColor="@color/text"
+        android:textSize="@dimen/body" />
+
+    <TextView
+        android:id="@+id/item_driver_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="在线"
+        android:textColor="@color/text"
+        android:textSize="@dimen/body" />
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="4dp"
+        android:src="@drawable/xtd_action_next" />
+
+</LinearLayout>
