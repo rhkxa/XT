@@ -84,8 +84,7 @@ public class LoginActivity extends BaseActivity {
 		setContentView(R.layout.activity_login);
 		init();
 		checkUpdate();
-		// UpdateManager.getUpdateManager().checkAppUpdate(LoginActivity.this,
-		// false);
+
 	}
 
 	private void init() {

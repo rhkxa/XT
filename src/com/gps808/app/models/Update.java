@@ -6,7 +6,7 @@ package com.gps808.app.models;
  *
  */
 public class Update {
-	private Float appVer;
+	private int appVer;
 
 	private String releaseTime;
 
@@ -16,11 +16,11 @@ public class Update {
 
 	private String updateUrl;
 
-	public Float getAppVer() {
+	public int getAppVer() {
 		return appVer;
 	}
 
-	public void setAppVer(Float appVer) {
+	public void setAppVer(int appVer) {
 		this.appVer = appVer;
 	}
 
