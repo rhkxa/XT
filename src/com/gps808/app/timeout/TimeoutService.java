@@ -1,7 +1,7 @@
 package com.gps808.app.timeout;
 
 import com.gps808.app.utils.LogUtils;
-import com.gps808.app.utils.XtdApplication;
+import com.gps808.app.utils.XTApplication;
 
 import android.app.Service;
 import android.content.Intent;
@@ -36,7 +36,7 @@ public class TimeoutService extends Service {
 			public void run() {
 				stopSelf();
 				LogUtils.DebugLog("程序超时,关闭程序");
-				XtdApplication.getInstance().exit();
+				XTApplication.getInstance().exit();
 			}
 		}).start();
 	}

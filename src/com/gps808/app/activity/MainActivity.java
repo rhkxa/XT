@@ -47,7 +47,7 @@ import com.gps808.app.utils.PreferenceUtils;
 import com.gps808.app.utils.StringUtils;
 import com.gps808.app.utils.UrlConfig;
 import com.gps808.app.utils.Utils;
-import com.gps808.app.utils.XtdApplication;
+import com.gps808.app.utils.XTApplication;
 import com.gps808.app.view.FancyButton;
 import com.gps808.app.view.PengButton;
 import com.gps808.app.view.Countdown.CountdownView;
@@ -702,7 +702,7 @@ public class MainActivity extends BaseActivity {
 				mExitTime = System.currentTimeMillis();
 			} else {
 				BaiduNaviManager.getInstance().uninit();
-				XtdApplication.getInstance().exit();
+				XTApplication.getInstance().exit();
 			}
 			return true;
 		}

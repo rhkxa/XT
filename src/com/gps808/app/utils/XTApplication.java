@@ -25,16 +25,16 @@ import android.graphics.Bitmap;
  * @date 2013-11-25 下午2:06:20
  * 
  */
-public class XtdApplication extends Application {
+public class XTApplication extends Application {
 
 	private List<Activity> activities = new ArrayList<Activity>();
-	private static XtdApplication instance;
+	private static XTApplication instance;
 	// 用于存放倒计时时间
 	public static Map<String, Long> map;
 
-	public static XtdApplication getInstance() {
+	public static XTApplication getInstance() {
 		if (null == instance) {
-			instance = new XtdApplication();
+			instance = new XTApplication();
 		}
 		return instance;
 	}

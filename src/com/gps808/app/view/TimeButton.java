@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.gps808.app.utils.XtdApplication;
+import com.gps808.app.utils.XTApplication;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -109,10 +109,10 @@ public class TimeButton extends Button implements OnClickListener {
 	 * 和activity的onDestroy()方法同步
 	 */
 	public void onDestroy() {
-		if (XtdApplication.map == null)
-			XtdApplication.map = new HashMap<String, Long>();
-		XtdApplication.map.put(TIME, time);
-		XtdApplication.map.put(CTIME, System.currentTimeMillis());
+		if (XTApplication.map == null)
+			XTApplication.map = new HashMap<String, Long>();
+		XTApplication.map.put(TIME, time);
+		XTApplication.map.put(CTIME, System.currentTimeMillis());
 		clearTimer();
 		Log.e("yung", "onDestroy");
 	}
@@ -121,14 +121,14 @@ public class TimeButton extends Button implements OnClickListener {
 	 * 和activity的onCreate()方法同步
 	 */
 	public void onCreate(Bundle bundle) {
-		Log.e("yung", XtdApplication.map + "");
-		if (XtdApplication.map == null)
+		Log.e("yung", XTApplication.map + "");
+		if (XTApplication.map == null)
 			return;
-		if (XtdApplication.map.size() <= 0)// 这里表示没有上次未完成的计时
+		if (XTApplication.map.size() <= 0)// 这里表示没有上次未完成的计时
 			return;
-		long time = System.currentTimeMillis() - XtdApplication.map.get(CTIME)
-				- XtdApplication.map.get(TIME);
-		XtdApplication.map.clear();
+		long time = System.currentTimeMillis() - XTApplication.map.get(CTIME)
+				- XTApplication.map.get(TIME);
+		XTApplication.map.clear();
 		if (time > 0)
 			return;
 		else {

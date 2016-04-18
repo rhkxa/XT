@@ -37,17 +37,17 @@ import com.tendcloud.tenddata.TCAgent;
  * 
  */
 public class BaseActivity extends FragmentActivity {
-	public XtdApplication xtdApplication;
+	public XTApplication xtdApplication;
 	private ProgressDialog progressDialog = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		xtdApplication = (XtdApplication) getApplication();
-		XtdApplication.getInstance().addActivity(this);
+		xtdApplication = (XTApplication) getApplication();
+		XTApplication.getInstance().addActivity(this);
 	}
 
-	public XtdApplication getAppContext() {
+	public XTApplication getAppContext() {
 		return xtdApplication;
 
 	}
