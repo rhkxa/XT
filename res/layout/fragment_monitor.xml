@@ -50,7 +50,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/play_progress"
                 android:layout_margin="8dp"
                 android:orientation="vertical" >
 
@@ -97,6 +96,38 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <com.gps808.app.view.FancyButton
+            android:id="@+id/chose_data"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/play_layout"
+            android:layout_margin="8dp"
+            fancy:fb_defaultColor="@color/half_transparent"
+            fancy:fb_focusColor="#8cc9f8"
+            fancy:fb_iconPosition="top"
+            fancy:fb_iconResource="@drawable/xtd_icon_stop"
+            fancy:fb_iconSize="24dp"
+            fancy:fb_radius="2dp"
+            fancy:fb_text="日期"
+            fancy:fb_textSize="10sp" />
+
+        <com.gps808.app.view.FancyButton
+            android:id="@+id/chose_speed"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/chose_data"
+            android:layout_margin="8dp"
+            fancy:fb_defaultColor="@color/half_transparent"
+            fancy:fb_focusColor="#8cc9f8"
+            fancy:fb_iconPosition="top"
+            fancy:fb_iconResource="@drawable/xtd_icon_speed"
+            fancy:fb_iconSize="24dp"
+            fancy:fb_radius="2dp"
+            fancy:fb_text="测速"
+            fancy:fb_textSize="10sp" />
     </RelativeLayout>
 
 </LinearLayout>

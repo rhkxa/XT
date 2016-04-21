@@ -9,12 +9,27 @@
         <item>历史订单</item>
         <item>设置</item>
     </string-array>
-    <string-array name="refresh_time">        <item>10秒</item>
-        <item>30秒</item>
-        <item>1分钟</item>
-        <item>5分钟</item>
-        <item>不刷新</item>
-    </string-array>
+
+    <integer-array name="refresh_time">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>300</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer-array name="stop_time">
+        <item>180</item>
+        <item>600</item>
+        <item>1200</item>
+        <item>1800</item>
+        <item>3600</item>
+        <item>7200</item>
+        <item>21600</item>
+        <item>43200</item>
+        <item>86400</item>
+    </integer-array>
+
     <string-array name="showGuidelinesArray">
         <item>Off</item>
         <item>On Touch</item>

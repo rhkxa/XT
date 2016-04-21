@@ -1,7 +1,6 @@
 package com.gps808.app.activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -28,6 +27,7 @@ import com.gps808.app.utils.CyptoUtils;
 import com.gps808.app.utils.HttpUtil;
 import com.gps808.app.utils.LogUtils;
 import com.gps808.app.utils.PreferenceUtils;
+import com.gps808.app.utils.StringUtils;
 import com.gps808.app.utils.UrlConfig;
 import com.gps808.app.utils.Utils;
 import com.gps808.app.view.FancyButton;
@@ -37,10 +37,13 @@ public class SetupActivity extends BaseActivity {
 
 	private TextView setup_monitor_time;
 	private TextView setup_track_time;
-	private LinearLayout setup_monitor, setup_track;
+	private TextView setup_stop_time;
+	private LinearLayout setup_monitor, setup_track, setup_stop;
 	private WheelDialog wheelDialog;
-	private List<String> data;
-	private List<Integer> timeList;
+	private List<String> refreshdata = new ArrayList<String>();
+	private List<String> stopdata = new ArrayList<String>();
+
+	private int[] refreshTime, stopTime;
 	private int mTime, tTime;
 	private LinearLayout reset_pass;
 	private FancyButton exit_login;
@@ -60,18 +63,23 @@ public class SetupActivity extends BaseActivity {
 				.getSupportFragmentManager().findFragmentById(R.id.title);
 		headerFragment.setTitleText("设置");
 		wheelDialog = new WheelDialog(this);
-		data = Arrays.asList(getResources()
-				.getStringArray(R.array.refresh_time));
-		timeList = new ArrayList<Integer>();
-		timeList.add(10);
-		timeList.add(30);
-		timeList.add(60);
-		timeList.add(300);
-		timeList.add(0);
+		refreshTime = getResources().getIntArray(R.array.refresh_time);
+		stopTime = getResources().getIntArray(R.array.stop_time);
+		for (int i = 0; i < refreshTime.length; i++) {
+			refreshdata.add(StringUtils.formatTime(refreshTime[i]));
+		}
+		for (int i = 0; i < stopTime.length; i++) {
+			stopdata.add(StringUtils.formatTime(stopTime[i]));
+		}
+
 		setup_monitor_time = (TextView) findViewById(R.id.setup_monitor_time);
 		setup_track_time = (TextView) findViewById(R.id.setup_track_time);
 		setup_monitor = (LinearLayout) findViewById(R.id.setup_monitor);
 		setup_track = (LinearLayout) findViewById(R.id.setup_track);
+		setup_stop_time = (TextView) findViewById(R.id.setup_stop_time);
+		setup_stop = (LinearLayout) findViewById(R.id.setup_stop);
+
+		setup_stop.setOnClickListener(click);
 		setup_monitor.setOnClickListener(click);
 		setup_track.setOnClickListener(click);
 		reset_pass = (LinearLayout) findViewById(R.id.reset_pass);
@@ -117,7 +125,15 @@ public class SetupActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			WheelCurvedPicker curvedPicker = new WheelCurvedPicker(
 					SetupActivity.this);
-			curvedPicker.setData(data);
+			switch (arg0.getId()) {
+			case R.id.setup_stop:
+				curvedPicker.setData(stopdata);
+				break;
+			default:
+				curvedPicker.setData(refreshdata);
+				break;
+			}
+
 			curvedPicker.setCurrentTextColor(getResources().getColor(
 					R.color.app_blue));
 			wheelDialog.setOnWheelClickListener(new OnWheelClickListener() {
@@ -128,14 +144,17 @@ public class SetupActivity extends BaseActivity {
 					switch (arg0.getId()) {
 					case R.id.setup_monitor:
 						setup_monitor_time.setText(key);
-						mTime = timeList.get(index);
+						mTime = refreshTime[index];
 						break;
 					case R.id.setup_track:
 						setup_track_time.setText(key);
-						tTime = timeList.get(index);
+						tTime = refreshTime[index];
+						break;
+					case R.id.setup_stop:
+						setup_stop_time.setText(key);
 						break;
 					}
-					setIntervalTime();
+					// setIntervalTime();
 				}
 			});
 			wheelDialog.setContentView(curvedPicker);
@@ -143,17 +162,6 @@ public class SetupActivity extends BaseActivity {
 
 		}
 	};
-
-	private int getPosition(int time) {
-		int position = 0;
-		for (int i = 0; i < timeList.size(); i++) {
-			if (timeList.get(i) == time) {
-				position = i;
-				break;
-			}
-		}
-		return position;
-	}
 
 	private void getData() {
 		String url = UrlConfig.getUserOptions();
@@ -165,10 +173,10 @@ public class SetupActivity extends BaseActivity {
 				LogUtils.DebugLog("result json", response.toString());
 				XbOption option = JSON.parseObject(response.toString(),
 						XbOption.class);
-				setup_monitor_time.setText(data.get(getPosition(option
-						.getMonitorInterval())));
-				setup_track_time.setText(data.get(getPosition(option
-						.getTrackInterval())));
+				setup_monitor_time.setText(StringUtils.formatTime(option
+						.getMonitorInterval()));
+				setup_track_time.setText(StringUtils.formatTime(option
+						.getTrackInterval()));
 				mTime = option.getMonitorInterval();
 				tTime = option.getTrackInterval();
 

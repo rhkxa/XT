@@ -3,11 +3,21 @@ package com.gps808.app.models;
 import java.util.List;
 
 public class XbMonitor {
-	private List<XbVehicle> locations ;
+	private List<XbVehicle> locations;
+
+	private List<StopPointInfo> stopPoints;
 
 	private String mileage;
 
 	private String totalTime;
+
+	public List<StopPointInfo> getStopPoints() {
+		return stopPoints;
+	}
+
+	public void setStopPoints(List<StopPointInfo> stopPoints) {
+		this.stopPoints = stopPoints;
+	}
 
 	public List<XbVehicle> getLocations() {
 		return locations;
@@ -32,5 +42,5 @@ public class XbMonitor {
 	public void setTotalTime(String totalTime) {
 		this.totalTime = totalTime;
 	}
-	
+
 }

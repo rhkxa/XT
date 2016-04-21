@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="选择日期时间 "
+                android:text="设置轨迹回放速度 "
                 android:textColor="@color/app_blue"
                 android:textSize="@dimen/title" />
 
@@ -47,12 +47,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="8dp"
-                    android:text="今天"
+                    android:text="快"
                     android:textColor="@color/text"
                     android:textSize="@dimen/subhead" />
 
                 <CheckBox
-                    android:id="@+id/chose_today"
+                    android:id="@+id/chose_fast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -71,12 +71,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="8dp"
-                    android:text="昨天"
+                    android:text="普通"
                     android:textColor="@color/text"
                     android:textSize="@dimen/subhead" />
 
                 <CheckBox
-                    android:id="@+id/chose_yesterday"
+                    android:id="@+id/chose_normal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -95,12 +95,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="8dp"
-                    android:text="前天"
+                    android:text="慢"
                     android:textColor="@color/text"
                     android:textSize="@dimen/subhead" />
 
                 <CheckBox
-                    android:id="@+id/chose_beforeday"
+                    android:id="@+id/chose_lower"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -108,114 +108,6 @@
                     android:button="@drawable/selector_check_oval"
                     android:padding="8dp" />
             </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:padding="8dp"
-                    android:text="前一小时"
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/subhead" />
-
-                <CheckBox
-                    android:id="@+id/chose_onehour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:button="@drawable/selector_check_oval"
-                    android:padding="8dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:padding="8dp"
-                    android:text="自定义"
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/subhead" />
-
-                <CheckBox
-                    android:id="@+id/chose_custom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:button="@drawable/selector_check_oval"
-                    android:padding="8dp" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/custom_time_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:padding="8dp"
-                        android:text="开始时间"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/subhead" />
-
-                    <TextView
-                        android:id="@+id/custom_start_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/corners_rect_gray"
-                        android:enabled="false"
-                        android:padding="8dp"
-                        android:text="点击输入开始时间"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/body" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:padding="8dp"
-                        android:text="结束时间"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/subhead" />
-
-                    <TextView
-                        android:id="@+id/custom_end_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/corners_rect_gray"
-                        android:enabled="false"
-                        android:padding="8dp"
-                        android:text="点击输入结束时间"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/body" />
-                </LinearLayout>
-            </LinearLayout>
 
             <View
                 style="@style/blackline"

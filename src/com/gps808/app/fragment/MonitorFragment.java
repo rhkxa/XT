@@ -24,6 +24,7 @@ import android.widget.ZoomControls;
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
@@ -41,13 +42,18 @@ import com.baidu.mapapi.model.LatLngBounds;
 import com.gps808.app.R;
 import com.gps808.app.dialog.DateDialog;
 import com.gps808.app.dialog.DateDialog.OnTimeClickListener;
+import com.gps808.app.dialog.SpeedDialog;
+import com.gps808.app.dialog.SpeedDialog.OnOkClickListener;
+import com.gps808.app.models.StopPointInfo;
 import com.gps808.app.models.XbMonitor;
 import com.gps808.app.models.XbVehicle;
 import com.gps808.app.utils.BaseFragment;
+import com.gps808.app.utils.Common;
 import com.gps808.app.utils.HttpUtil;
 import com.gps808.app.utils.LogUtils;
 import com.gps808.app.utils.UrlConfig;
 import com.gps808.app.utils.Utils;
+import com.gps808.app.view.FancyButton;
 
 /**
  * 轨迹回放
@@ -60,13 +66,19 @@ public class MonitorFragment extends BaseFragment {
 	BitmapDescriptor endIcon = BitmapDescriptorFactory
 			.fromResource(R.drawable.map_end_icon);
 	BitmapDescriptor startIcon = BitmapDescriptorFactory
-			.fromResource(R.drawable.xtd_map_start);
+			.fromResource(R.drawable.map_start_icon);
 	BitmapDescriptor locationIcon = BitmapDescriptorFactory
 			.fromResource(R.drawable.xtd_car_position);
+	BitmapDescriptor stopIcon = BitmapDescriptorFactory
+			.fromResource(R.drawable.icon_gcoding);
+
+	BitmapDescriptor mBlueTexture = BitmapDescriptorFactory
+			.fromResource(R.drawable.icon_road_blue_arrow);
+
 	private TextureMapView mMapView;
 	private BaiduMap mBaiduMap;
 	Polyline mPolyline;
-	private InfoWindow mInfoWindow;
+private InfoWindow mInfoWindow;
 	private String vid;
 	private ToggleButton play_toogle;
 	private TextView play_mileage;
@@ -80,6 +92,8 @@ public class MonitorFragment extends BaseFragment {
 	private double[] doubleLng;
 	private List<XbVehicle> xbVehicles;
 	private XbMonitor xbMonitor;
+	private FancyButton chose_data, chose_speed;
+	private int speed = 500;
 
 	public static MonitorFragment newInstance(String id) {
 		MonitorFragment fragment = new MonitorFragment();
@@ -99,17 +113,7 @@ public class MonitorFragment extends BaseFragment {
 
 	private void init(View root) {
 		// TODO Auto-generated method stub
-		HeaderFragment headerFragment = (HeaderFragment) getActivity()
-				.getSupportFragmentManager().findFragmentById(R.id.title);
-		headerFragment.setImageButtonResource(R.drawable.xtd_action_setup);
-		headerFragment.setCommentBtnListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				showChoseDate();
-			}
-		});
 		mMapView = (TextureMapView) root.findViewById(R.id.bmapView);
 		mBaiduMap = mMapView.getMap();
 		MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
@@ -122,6 +126,54 @@ public class MonitorFragment extends BaseFragment {
 				child.setVisibility(View.INVISIBLE);
 			}
 		}
+		mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+			
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				// TODO Auto-generated method stub
+				
+//				mInfoWindow = new InfoWindow(,
+//						marker.getPosition(), Common.INFOWINDOW_POSITION);
+//				mBaiduMap.showInfoWindow(mInfoWindow);
+				return true;
+			}
+		});
+		chose_data = (FancyButton) root.findViewById(R.id.chose_data);
+		chose_data.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				DateDialog dateDialog = new DateDialog(getActivity());
+				dateDialog.setOnTimeClickListener(new OnTimeClickListener() {
+
+					@Override
+					public void onTimeOk(String start, String end) {
+						// TODO Auto-generated method stub
+						getData(start, end);
+					}
+				});
+				dateDialog.show();
+			}
+		});
+		chose_speed = (FancyButton) root.findViewById(R.id.chose_speed);
+		chose_speed.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				SpeedDialog speedDialog = new SpeedDialog(getActivity());
+				speedDialog.setOnOkClickListener(new OnOkClickListener() {
+
+					@Override
+					public void onOK(int s) {
+						// TODO Auto-generated method stub
+						speed = s;
+					}
+				});
+				speedDialog.show();
+			}
+		});
 		play_toogle = (ToggleButton) root.findViewById(R.id.play_toogle);
 		play_mileage = (TextView) root.findViewById(R.id.play_mileage);
 		play_time = (TextView) root.findViewById(R.id.play_time);
@@ -151,7 +203,7 @@ public class MonitorFragment extends BaseFragment {
 				}
 			}
 		});
-		headerFragment.getCommentBtn().performClick();
+		chose_data.performClick();
 	}
 
 	// 获取服务器数据
@@ -190,6 +242,7 @@ public class MonitorFragment extends BaseFragment {
 						play_mileage.setText("行驶里程:" + xbMonitor.getMileage()
 								+ "km");
 						xbVehicles = xbMonitor.getLocations();
+
 						if (xbVehicles.size() > 0) {
 							play_progress.setMax(xbVehicles.size());
 							play_toogle.setEnabled(true);
@@ -211,6 +264,7 @@ public class MonitorFragment extends BaseFragment {
 
 	// 解析数据,画出轨迹
 	private void parseData() {
+		mBaiduMap.clear();
 		List<LatLng> points = new ArrayList<LatLng>();
 
 		LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -221,12 +275,23 @@ public class MonitorFragment extends BaseFragment {
 			points.add(latLng);
 			builder.include(latLng);
 		}
-		mBaiduMap.clear();
+		List<OverlayOptions> stopOverlays = new ArrayList<OverlayOptions>();
+		OverlayOptions overlay = null;
+		for (StopPointInfo info : xbMonitor.getStopPoints()) {
+			doubleLng = Utils.getLng(info.getLocation());
+			// 位置
+			latLng = new LatLng(doubleLng[1], doubleLng[0]);
+			overlay = new MarkerOptions().position(latLng).icon(stopIcon)
+					.title(info.getInterval() + info.getTime());
+			stopOverlays.add(overlay);
+
+		}
+		mBaiduMap.addOverlays(stopOverlays);
 		// 添加普通折线绘制
 		if (points.size() >= 2) {
 
-			OverlayOptions ooPolyline = new PolylineOptions().width(10)
-					.color(getResources().getColor(R.color.app_green))
+			OverlayOptions ooPolyline = new PolylineOptions().width(15)
+					.customTexture(mBlueTexture).dottedLine(true)
 					.points(points);
 			mPolyline = (Polyline) mBaiduMap.addOverlay(ooPolyline);
 			mBaiduMap.addOverlay(new MarkerOptions().position(points.get(0))
@@ -249,12 +314,12 @@ public class MonitorFragment extends BaseFragment {
 			// 图标
 			OverlayOptions overlayOptions = new MarkerOptions()
 					.position(latLng).icon(locationIcon).zIndex(5)
-					.rotate(360-car.getDirection());
+					.rotate(360 - car.getDirection());
 			marker = (Marker) (mBaiduMap.addOverlay(overlayOptions));
 
 		} else {
 			marker.setPosition(latLng);
-			marker.setRotate(360-car.getDirection());
+			marker.setRotate(360 - car.getDirection());
 		}
 		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(latLng));
 
@@ -276,26 +341,13 @@ public class MonitorFragment extends BaseFragment {
 			i++;
 			play_progress.setProgress(i);
 			if (i < xbVehicles.size()) {
-				handler.postDelayed(this, 500);
+				handler.postDelayed(this, speed);
 			} else {
 				play_toogle.setChecked(false);
-				i=0;
+				i = 0;
 			}
 		}
 	};
-
-	private void showChoseDate() {
-		DateDialog dateDialog = new DateDialog(getActivity());
-		dateDialog.setOnTimeClickListener(new OnTimeClickListener() {
-
-			@Override
-			public void onTimeOk(String start, String end) {
-				// TODO Auto-generated method stub
-				getData(start, end);
-			}
-		});
-		dateDialog.show();
-	}
 
 	@Override
 	public void onPause() {
@@ -319,6 +371,8 @@ public class MonitorFragment extends BaseFragment {
 		endIcon.recycle();
 		startIcon.recycle();
 		locationIcon.recycle();
+		stopIcon.recycle();
+		mBlueTexture.recycle();
 		super.onDestroy();
 	}
 

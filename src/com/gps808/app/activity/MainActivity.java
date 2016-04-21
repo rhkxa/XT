@@ -435,11 +435,11 @@ public class MainActivity extends BaseActivity {
 		viewHolder.popwindows_time.setText("时间:" + xbVehicle.getTime());
 		if (xbVehicle.isOnline()) {
 			if (xbVehicle.getSpeed() > 1) {
-				viewHolder.popwindows_state.setText("行驶中 "
+				viewHolder.popwindows_state.setText("行驶中"
 						+ xbVehicle.getSpeed() + "km/h");
 			} else {
-				viewHolder.popwindows_state.setText("停车中  "
-						+ xbVehicle.getSpeed() + "km/h");
+				viewHolder.popwindows_state.setText("停车中"
+						+ StringUtils.friendly_time(xbVehicle.getTime()));
 			}
 
 			viewHolder.popwindows_state.setTextColor(getResources().getColor(
@@ -547,7 +547,7 @@ public class MainActivity extends BaseActivity {
 		handler_runnable_time = PreferenceUtils.getInstance(MainActivity.this)
 				.getMonitorTime() * 1000;
 		LogUtils.DebugLog("main time" + handler_runnable_time);
-		handler.postDelayed(runnable, handler_runnable_time);
+		handler.post(runnable);
 		startCountdown();
 		mMapView.onResume();
 		super.onResume();

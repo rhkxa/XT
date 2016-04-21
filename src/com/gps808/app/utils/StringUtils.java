@@ -380,6 +380,7 @@ public class StringUtils {
 		String date = sdf.format(new Date());
 		return date;
 	}
+
 	public static String formatDataSize(int size) {
 		String ret = "";
 		if (size < (1024 * 1024)) {
@@ -389,4 +390,39 @@ public class StringUtils {
 		}
 		return ret;
 	}
+
+	/**
+	 * 秒转化
+	 */
+	public static String formatTime(long ms) {
+
+		int ss = 1;
+		int mi = ss * 60;
+		int hh = mi * 60;
+		int dd = hh * 24;
+
+		long day = ms / dd;
+		long hour = (ms - day * dd) / hh;
+		long minute = (ms - day * dd - hour * hh) / mi;
+		long second = (ms - day * dd - hour * hh - minute * mi) / ss;
+		StringBuffer sb = new StringBuffer();
+		if (day > 0) {
+			sb.append(day).append("天");
+		}
+		if (hour > 0) {
+			sb.append(hour).append("小时");
+		}
+		if (minute > 0) {
+			sb.append(minute).append("分钟");
+		}
+		if (second > 0) {
+			sb.append(second).append("秒");
+		}
+		if (isEmpty(sb.toString())) {
+			sb.append("不刷新");
+		}
+
+		return sb.toString();
+	}
+
 }

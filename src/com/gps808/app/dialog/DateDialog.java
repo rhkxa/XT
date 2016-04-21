@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -35,6 +36,7 @@ public class DateDialog extends Dialog {
 	private Context context;
 	private String start, end;
 	private SimpleDateFormat sdf;
+	private LinearLayout custom_time_layout;
 
 	public DateDialog(Context context) {
 		super(context, R.style.Dialog);
@@ -66,6 +68,7 @@ public class DateDialog extends Dialog {
 		chose_custom = (CheckBox) findViewById(R.id.chose_custom);
 		dialog_no = (FancyButton) findViewById(R.id.dialog_no);
 		dialog_ok = (FancyButton) findViewById(R.id.dialog_ok);
+		custom_time_layout = (LinearLayout) findViewById(R.id.custom_time_layout);
 		dialog_no.setOnClickListener(click);
 		dialog_ok.setOnClickListener(click);
 		checkboxList.add(chose_beforeday);
@@ -84,9 +87,11 @@ public class DateDialog extends Dialog {
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				// TODO Auto-generated method stub
 				if (arg1) {
+					custom_time_layout.setVisibility(View.VISIBLE);
 					custom_end_time.setEnabled(true);
 					custom_start_time.setEnabled(true);
 				} else {
+					custom_time_layout.setVisibility(View.GONE);
 					custom_end_time.setEnabled(true);
 					custom_start_time.setEnabled(true);
 				}
