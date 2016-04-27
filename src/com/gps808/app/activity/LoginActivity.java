@@ -143,8 +143,10 @@ public class LoginActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Utils.toExploer(LoginActivity.this,
-						"http://app.gps808.com/joinUs.html");
+				Intent intent = new Intent(LoginActivity.this,
+						JoinUsActivity.class);
+				startActivity(intent);
+
 			}
 		});
 		login_test.setOnClickListener(new OnClickListener() {
@@ -530,6 +532,12 @@ public class LoginActivity extends BaseActivity {
 					}
 				});
 
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
 	}
 
 	// 双击退出

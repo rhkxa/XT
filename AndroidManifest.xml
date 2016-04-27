@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gps808.app"
-    android:versionCode="17"
-    android:versionName="2.5.2" >
+    android:versionCode="18"
+    android:versionName="2.6" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -130,6 +130,7 @@
         <activity android:name="com.gps808.app.activity.EdogActivity" />
         <activity android:name="com.gps808.app.activity.ShowMapActivity" />
         <activity android:name="com.gps808.app.activity.AgentInfoActivity" />
+        <activity android:name="com.gps808.app.activity.JoinUsActivity" />
 
         <service android:name="com.gps808.app.timeout.TimeoutService" >
         </service>

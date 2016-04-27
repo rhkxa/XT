@@ -9,10 +9,14 @@ import com.gps808.app.fragment.HeaderFragment;
 import com.gps808.app.models.AgentInfo;
 import com.gps808.app.utils.BaseActivity;
 import com.gps808.app.utils.HttpUtil;
+import com.gps808.app.utils.StringUtils;
 import com.gps808.app.utils.UrlConfig;
+import com.gps808.app.utils.Utils;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class AgentInfoActivity extends BaseActivity {
@@ -23,7 +27,7 @@ public class AgentInfoActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_angent_info);
+		setContentView(R.layout.activity_agent_info);
 		init();
 	}
 
@@ -35,6 +39,17 @@ public class AgentInfoActivity extends BaseActivity {
 		angent_name = (TextView) findViewById(R.id.angent_name);
 		angent_people = (TextView) findViewById(R.id.angent_people);
 		angent_phone = (TextView) findViewById(R.id.angent_phone);
+		angent_phone.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (!StringUtils.isEmpty(angent_phone.getText().toString())) {
+					Utils.callPhone(AgentInfoActivity.this, angent_phone
+							.getText().toString());
+				}
+			}
+		});
 		getData();
 	}
 
@@ -53,7 +68,6 @@ public class AgentInfoActivity extends BaseActivity {
 						angent_people.setText(agent.getName());
 						angent_phone.setText(agent.getPhone());
 					}
-
 				});
 	}
 }

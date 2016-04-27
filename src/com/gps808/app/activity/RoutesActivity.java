@@ -103,21 +103,7 @@ public class RoutesActivity extends BaseActivity {
 						getData(false);
 					}
 				});
-		mExpandableListView.setOnChildClickListener(new OnChildClickListener() {
-
-			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1,
-					int arg2, int arg3, long arg4) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(RoutesActivity.this,
-						DisplayLineActivity.class);
-				intent.putExtra("rid",
-						routesList.get(arg2).getSub().get(arg3).getRid());
-				startActivity(intent);
-				LogUtils.DebugLog("位置一"+arg2+"位置二"+arg3);
-				return true;
-			}
-		});
+	
 
 		String cacheStr = FileUtils.read(RoutesActivity.this, CacheName);
 		if (StringUtils.isEmpty(cacheStr)) {

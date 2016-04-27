@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="2.5.1"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/body" />
         </LinearLayout>
@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="2016-03-23"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/body" />
         </LinearLayout>
@@ -129,7 +129,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="沧州星通卫星定位有限公司"
+                android:autoLink="phone"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/body" />
         </LinearLayout>

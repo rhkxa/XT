@@ -3,12 +3,17 @@ package com.gps808.app.adapter;
 import java.util.List;
 
 import com.gps808.app.R;
+import com.gps808.app.activity.DisplayLineActivity;
+import com.gps808.app.activity.RoutesActivity;
 import com.gps808.app.models.RoutesInfo;
+import com.gps808.app.utils.LogUtils;
 import com.gps808.app.view.FancyButton;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
@@ -37,7 +42,7 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int arg0, int arg1, boolean arg2, View arg3,
+	public View getChildView(final int arg0, final int arg1, boolean arg2, View arg3,
 			ViewGroup arg4) {
 		// TODO Auto-generated method stub
 		ChildViewHolder vh;
@@ -61,6 +66,18 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 				.getStartPlace());
 		vh.item_routes_end.setText(datalist.get(arg0).getSub().get(arg1)
 				.getEndPlace());
+		arg3.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(mContext,
+						DisplayLineActivity.class);
+				intent.putExtra("rid",
+						datalist.get(arg0).getSub().get(arg1).getRid());
+				mContext.startActivity(intent);
+			}
+		});
 
 		return arg3;
 
@@ -69,7 +86,11 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public int getChildrenCount(int arg0) {
 		// TODO Auto-generated method stub
-		return datalist.get(arg0).getSub().size();
+		if (datalist.get(arg0).getSub() == null) {
+			return 0;
+		} else {
+			return datalist.get(arg0).getSub().size();
+		}
 	}
 
 	@Override
@@ -128,7 +149,6 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
 
 	class ChildViewHolder {
 		FancyButton item_routes_image;

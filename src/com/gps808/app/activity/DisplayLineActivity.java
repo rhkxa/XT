@@ -165,8 +165,8 @@ public class DisplayLineActivity extends BaseActivity {
 			xbDisplayLine = JSON.parseObject(content, XbDisplayLine.class);
 			parseData();
 		}
-		if (PreferenceUtils.getInstance(DisplayLineActivity.this).getUserName()
-				.equals("tf")) {
+		if ("tf".equals(PreferenceUtils.getInstance(DisplayLineActivity.this)
+				.getUserName())) {
 			navi_check.setVisibility(View.VISIBLE);
 			search_layout.setVisibility(View.VISIBLE);
 		}

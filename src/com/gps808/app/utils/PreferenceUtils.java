@@ -249,7 +249,7 @@ public class PreferenceUtils {
 		editor.commit();
 	}
 	public int getPingTai(){
-		return mSharedPreferences.getInt("pingtai", 0);
+		return mSharedPreferences.getInt("pingtai", 1);
 	}
 
 }
