@@ -7,6 +7,16 @@ public class StopPointInfo {
 
 	private String location;
 
+	private String addr;
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
 	public String getInterval() {
 		return interval;
 	}
@@ -30,7 +40,5 @@ public class StopPointInfo {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
-	
-	
+
 }

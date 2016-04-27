@@ -106,6 +106,9 @@ public class MainActivity extends BaseActivity {
 			.fromResource(R.drawable.xtd_carlogo_on);
 	BitmapDescriptor offline = BitmapDescriptorFactory
 			.fromResource(R.drawable.xtd_carlogo_off);
+	BitmapDescriptor pause = BitmapDescriptorFactory
+			.fromResource(R.drawable.xtd_carlogo_pause);
+
 	private FancyButton main_refresh;
 	int flag = 0;
 	private View mMarkerLy;
@@ -314,7 +317,11 @@ public class MainActivity extends BaseActivity {
 			// 位置
 			latLng = new LatLng(doubleLng[1], doubleLng[0]);
 			if (info.isOnline()) {
-				car = online;
+				if (info.getSpeed() > 1) {
+					car = online;
+				} else {
+					car = pause;
+				}
 			} else {
 				car = offline;
 			}
@@ -324,10 +331,8 @@ public class MainActivity extends BaseActivity {
 			bundle.putString("id", info.getVid());
 			if (isFirstLoad) {
 				overlayOptions = new MarkerOptions().position(latLng).icon(car)
-						.rotate(360 - info.getDirection());
+						.rotate(360 - info.getDirection()).extraInfo(bundle);
 				marker = (Marker) (mBaiduMap.addOverlay(overlayOptions));
-
-				marker.setExtraInfo(bundle);
 				markerList.add(marker);
 			} else {
 				markerPosition = loadMarkerPosition(info.getVid());
@@ -438,14 +443,15 @@ public class MainActivity extends BaseActivity {
 				viewHolder.popwindows_state.setText("行驶中"
 						+ xbVehicle.getSpeed() + "km/h");
 			} else {
-				viewHolder.popwindows_state.setText("停车中"
-						+ StringUtils.friendly_time(xbVehicle.getTime()));
+				viewHolder.popwindows_state.setText("停车中("
+						+ StringUtils.date_interval(xbVehicle.getTime())+")");
 			}
 
 			viewHolder.popwindows_state.setTextColor(getResources().getColor(
 					R.color.app_green));
 		} else {
-			viewHolder.popwindows_state.setText("离线");
+			viewHolder.popwindows_state.setText("离线("
+					+ StringUtils.date_interval(xbVehicle.getTime())+")");
 			viewHolder.popwindows_state.setTextColor(getResources().getColor(
 					R.color.text));
 		}
@@ -561,6 +567,7 @@ public class MainActivity extends BaseActivity {
 		// 回收 bitmap 资源
 		online.recycle();
 		offline.recycle();
+		pause.recycle();
 		if (mLocClient != null) {
 			// 退出时销毁定位
 			mLocClient.stop();

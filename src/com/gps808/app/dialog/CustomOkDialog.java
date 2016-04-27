@@ -19,7 +19,7 @@ public class CustomOkDialog extends Dialog {
 	private String title, content;
 	private TextView dialog_title;
 	private LinkView dialog_content;
-	private FancyButton dialog_ok;
+	private FancyButton dialog_ok, dialog_buy;
 
 	public CustomOkDialog(Context context, String title, String content,
 			View.OnClickListener okClickListener) {
@@ -61,11 +61,22 @@ public class CustomOkDialog extends Dialog {
 		}
 		dialog_ok.setOnClickListener(okClickListener);
 		dialog_content.setLinkClickListener(new OnLinkClickListener() {
-			
+
 			@Override
 			public void onLinkClick() {
 				// TODO Auto-generated method stub
 				Utils.callPhone(context, "0317-4227916");
+			}
+		});
+		dialog_buy = (FancyButton) findViewById(R.id.dialog_buy);
+		dialog_buy.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Utils.toExploer(
+						context,
+						"http://mokebao.molink.cn/index.php?g=Wap&m=Index&a=index&token=bldbtc1458693848");
 			}
 		});
 
@@ -82,8 +93,6 @@ public class CustomOkDialog extends Dialog {
 	public void setOkClick(android.view.View.OnClickListener listener) {
 		dialog_ok.setOnClickListener(listener);
 	}
-	
-	
 
 	private android.view.View.OnClickListener close = new View.OnClickListener() {
 

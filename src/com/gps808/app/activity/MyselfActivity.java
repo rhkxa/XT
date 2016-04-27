@@ -30,7 +30,7 @@ public class MyselfActivity extends BaseActivity {
 	private ImageView alter;
 	private TextView mynickname;
 	private CircleImageView my_headimage;
-	private LinearLayout my_setup, my_about, my_help;
+	private LinearLayout my_setup, my_about, my_help,my_service;
 	private FancyButton my_driver, my_car, my_map,
 			my_police;
 	private TextView my_weather;
@@ -66,6 +66,8 @@ public class MyselfActivity extends BaseActivity {
 		my_about.setOnClickListener(click);
 		my_help = (LinearLayout) findViewById(R.id.my_help);
 		my_help.setOnClickListener(click);
+		my_service = (LinearLayout) findViewById(R.id.my_service);
+		my_service.setOnClickListener(click);
 		my_map = (FancyButton) findViewById(R.id.my_map);
 		my_map.setOnClickListener(click);
 		my_police = (FancyButton) findViewById(R.id.my_police);
@@ -111,6 +113,9 @@ public class MyselfActivity extends BaseActivity {
 				break;
 			case R.id.my_driver:
 				cls = DriverActivity.class;
+				break;
+			case R.id.my_service:
+				cls = AgentInfoActivity.class;
 				break;
 			
 			case R.id.my_help:

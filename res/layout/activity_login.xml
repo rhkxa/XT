@@ -50,6 +50,7 @@
                 fancy:fb_iconSize="48dp"
                 fancy:fb_radius="50dp"
                 fancy:fb_text="北斗"
+                android:visibility="gone"
                 fancy:fb_textColor="@color/text" />
 
             <com.gps808.app.view.FancyButton
@@ -64,7 +65,7 @@
                 fancy:fb_iconResource="@drawable/xtd_icon_gray"
                 fancy:fb_iconSize="48dp"
                 fancy:fb_radius="50dp"
-                fancy:fb_text="Gps"
+                fancy:fb_text="GPS"
                 fancy:fb_textColor="@color/text" />
         </LinearLayout>
 
@@ -187,7 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="在线购买"
+            android:text="加盟代理"
             android:textColor="@color/tag_blue"
             android:textSize="@dimen/button" />
 

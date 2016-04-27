@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -24,13 +25,14 @@ import android.widget.ZoomControls;
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
@@ -70,7 +72,7 @@ public class MonitorFragment extends BaseFragment {
 	BitmapDescriptor locationIcon = BitmapDescriptorFactory
 			.fromResource(R.drawable.xtd_car_position);
 	BitmapDescriptor stopIcon = BitmapDescriptorFactory
-			.fromResource(R.drawable.icon_gcoding);
+			.fromResource(R.drawable.map_location_icon);
 
 	BitmapDescriptor mBlueTexture = BitmapDescriptorFactory
 			.fromResource(R.drawable.icon_road_blue_arrow);
@@ -78,7 +80,7 @@ public class MonitorFragment extends BaseFragment {
 	private TextureMapView mMapView;
 	private BaiduMap mBaiduMap;
 	Polyline mPolyline;
-private InfoWindow mInfoWindow;
+	private InfoWindow mInfoWindow;
 	private String vid;
 	private ToggleButton play_toogle;
 	private TextView play_mileage;
@@ -94,6 +96,7 @@ private InfoWindow mInfoWindow;
 	private XbMonitor xbMonitor;
 	private FancyButton chose_data, chose_speed;
 	private int speed = 500;
+	private View mMarkerLy;
 
 	public static MonitorFragment newInstance(String id) {
 		MonitorFragment fragment = new MonitorFragment();
@@ -126,16 +129,34 @@ private InfoWindow mInfoWindow;
 				child.setVisibility(View.INVISIBLE);
 			}
 		}
+		LayoutInflater inflater = LayoutInflater.from(getActivity());
+		mMarkerLy = inflater.inflate(R.layout.popwindows_stop, null);
 		mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
-			
+
 			@Override
 			public boolean onMarkerClick(Marker arg0) {
 				// TODO Auto-generated method stub
-				
-//				mInfoWindow = new InfoWindow(,
-//						marker.getPosition(), Common.INFOWINDOW_POSITION);
-//				mBaiduMap.showInfoWindow(mInfoWindow);
+				if (arg0.getZIndex() == 1) {
+					StopPointInfo info = JSON.parseObject(arg0.getExtraInfo()
+							.getString("info"), StopPointInfo.class);
+					mInfoWindow = new InfoWindow(popupInfo(mMarkerLy, info),
+							arg0.getPosition(), Common.INFOWINDOW_POSITION);
+					mBaiduMap.showInfoWindow(mInfoWindow);
+				}
 				return true;
+			}
+		});
+		// 点击地图事件
+		mBaiduMap.setOnMapClickListener(new OnMapClickListener() {
+
+			@Override
+			public boolean onMapPoiClick(MapPoi arg0) {
+				return false;
+			}
+
+			@Override
+			public void onMapClick(LatLng arg0) {
+				mBaiduMap.hideInfoWindow();
 			}
 		});
 		chose_data = (FancyButton) root.findViewById(R.id.chose_data);
@@ -279,10 +300,14 @@ private InfoWindow mInfoWindow;
 		OverlayOptions overlay = null;
 		for (StopPointInfo info : xbMonitor.getStopPoints()) {
 			doubleLng = Utils.getLng(info.getLocation());
+			Bundle bundle = new Bundle();
+			bundle.putString("info", JSON.toJSONString(info));
+
 			// 位置
 			latLng = new LatLng(doubleLng[1], doubleLng[0]);
 			overlay = new MarkerOptions().position(latLng).icon(stopIcon)
-					.title(info.getInterval() + info.getTime());
+					.extraInfo(bundle).zIndex(1);
+
 			stopOverlays.add(overlay);
 
 		}
@@ -303,6 +328,46 @@ private InfoWindow mInfoWindow;
 		// 缩放地图，使所有Overlay都在合适的视野内
 		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder
 				.build()));
+	}
+
+	/**
+	 * 根据info为布局上的控件设置信息
+	 * 
+	 * @param mMarkerInfo2
+	 * @param info
+	 */
+	private View popupInfo(View mMarkerLy, StopPointInfo info) {
+		ViewHolder viewHolder = null;
+		if (mMarkerLy.getTag() == null) {
+			viewHolder = new ViewHolder();
+
+			viewHolder.popwindows_time = (TextView) mMarkerLy
+					.findViewById(R.id.popwindows_time);
+
+			viewHolder.popwindows_position = (TextView) mMarkerLy
+					.findViewById(R.id.popwindows_position);
+			viewHolder.popwindows_interval = (TextView) mMarkerLy
+					.findViewById(R.id.popwindows_interval);
+			mMarkerLy.setTag(viewHolder);
+		}
+		viewHolder = (ViewHolder) mMarkerLy.getTag();
+		viewHolder.popwindows_interval.setText("时长:" + info.getInterval());
+		viewHolder.popwindows_time.setText("时间:" + info.getTime());
+		viewHolder.popwindows_position.setText("位置:" + info.getAddr());
+
+		return mMarkerLy;
+	}
+
+	/**
+	 * 复用弹出面板mMarkerLy的控件
+	 * 
+	 */
+	private class ViewHolder {
+
+		TextView popwindows_time;
+		TextView popwindows_interval;
+		TextView popwindows_position;
+
 	}
 
 	// 设置汽车的位置

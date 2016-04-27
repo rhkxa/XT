@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_backgroud"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        class="com.gps808.app.fragment.HeaderFragment" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_blue"
+            android:gravity="center"
+            android:padding="16dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <com.gps808.app.view.FancyButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    fancy:fb_borderColor="@color/tag_blue"
+                    fancy:fb_borderWidth="2dp"
+                    fancy:fb_defaultColor="@color/white"
+                    fancy:fb_iconResource="@drawable/xtd_icon_gray"
+                    fancy:fb_iconSize="48dp"
+                    fancy:fb_radius="50dp" />
+
+                <TextView
+                    android:id="@+id/my_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/subhead"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/my_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天气加载中"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/body"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="16dp" >
+
+            <TextView
+                android:id="@+id/item_bill_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="服务商:"
+                android:textSize="@dimen/body" />
+
+            <TextView
+                android:id="@+id/angent_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="2.5.1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body" />
+        </LinearLayout>
+
+        <View style="@style/blackline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="16dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人:"
+                android:textSize="@dimen/body" />
+
+            <TextView
+                android:id="@+id/angent_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="2016-03-23"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body" />
+        </LinearLayout>
+
+        <View style="@style/blackline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="16dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电话:"
+                android:textSize="@dimen/body" />
+
+            <TextView
+                android:id="@+id/angent_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="沧州星通卫星定位有限公司"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body" />
+        </LinearLayout>
+
+        <View style="@style/blackline" />
+    </LinearLayout>
+
+</LinearLayout>

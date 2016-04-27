@@ -50,6 +50,23 @@ public class StringUtils {
 		}
 	}
 
+	public static String date_interval(String sdate) {
+		Date time = null;
+		time = toDate(sdate);
+		if (time == null) {
+			return "Unknown";
+		}
+		String ftime = "";
+		Calendar cal = Calendar.getInstance();
+		long l = cal.getTimeInMillis() - time.getTime();
+		long day = l / (24 * 60 * 60 * 1000);
+		long hour = (l / (60 * 60 * 1000) - day * 24);
+		long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
+		long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+		ftime = day + "天" + hour + "小时" + min + "分" + s + "秒";
+		return ftime;
+	}
+
 	/**
 	 * 以友好的方式显示时间
 	 * 

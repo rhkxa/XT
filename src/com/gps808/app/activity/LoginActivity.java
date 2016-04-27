@@ -143,9 +143,8 @@ public class LoginActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Utils.toExploer(
-						LoginActivity.this,
-						"http://mokebao.molink.cn/index.php?g=Wap&m=Index&a=index&token=bldbtc1458693848");
+				Utils.toExploer(LoginActivity.this,
+						"http://app.gps808.com/joinUs.html");
 			}
 		});
 		login_test.setOnClickListener(new OnClickListener() {

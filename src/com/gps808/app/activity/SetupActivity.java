@@ -44,7 +44,7 @@ public class SetupActivity extends BaseActivity {
 	private List<String> stopdata = new ArrayList<String>();
 
 	private int[] refreshTime, stopTime;
-	private int mTime, tTime;
+	private int mTime, tTime, sTime;
 	private LinearLayout reset_pass;
 	private FancyButton exit_login;
 
@@ -152,9 +152,10 @@ public class SetupActivity extends BaseActivity {
 						break;
 					case R.id.setup_stop:
 						setup_stop_time.setText(key);
+						sTime = stopTime[index];
 						break;
 					}
-					// setIntervalTime();
+					setIntervalTime();
 				}
 			});
 			wheelDialog.setContentView(curvedPicker);
@@ -164,12 +165,14 @@ public class SetupActivity extends BaseActivity {
 	};
 
 	private void getData() {
+		showProgressDialog(SetupActivity.this, "正在加载配置");
 		String url = UrlConfig.getUserOptions();
 		HttpUtil.get(SetupActivity.this, url, new jsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					JSONObject response) {
 				// TODO Auto-generated method stub
+				dismissProgressDialog();
 				LogUtils.DebugLog("result json", response.toString());
 				XbOption option = JSON.parseObject(response.toString(),
 						XbOption.class);
@@ -177,8 +180,11 @@ public class SetupActivity extends BaseActivity {
 						.getMonitorInterval()));
 				setup_track_time.setText(StringUtils.formatTime(option
 						.getTrackInterval()));
+				setup_stop_time.setText(StringUtils.formatTime(option
+						.getStopDisplayInterval()));
 				mTime = option.getMonitorInterval();
 				tTime = option.getTrackInterval();
+				sTime = option.getStopDisplayInterval();
 
 				super.onSuccess(statusCode, headers, response);
 			}
@@ -229,6 +235,7 @@ public class SetupActivity extends BaseActivity {
 		try {
 			params.put("monitorInterval", mTime);
 			params.put("trackInterval", tTime);
+			params.put("stopDisplayInterval", sTime);
 			entity = new StringEntity(params.toString(), "UTF-8");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

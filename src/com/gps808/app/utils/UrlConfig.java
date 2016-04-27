@@ -3,10 +3,6 @@ package com.gps808.app.utils;
 public class UrlConfig {
 
 	public static String SERVER = "";
-	
-	
-	
-	// private static final String SERVER = "http://139.129.23.31/shop-api/";
 
 	/**
 	 * 登录
@@ -306,6 +302,10 @@ public class UrlConfig {
 	public static final String getMatchVichcle(String loc, String eId) {
 		return SERVER + "vehicle/matchingVehicle?location=" + loc + "&eId="
 				+ eId;
+	}
+
+	public static final String getAgent() {
+		return SERVER + "user/agentInfo";
 	}
 
 }
