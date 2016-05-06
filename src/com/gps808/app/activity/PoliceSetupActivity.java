@@ -125,7 +125,6 @@ public class PoliceSetupActivity extends BaseActivity {
 	}
 
 	private void setData() {
-
 		String url = UrlConfig.getVehicleSetAlarms();
 		StringEntity entity = null;
 		try {
@@ -152,20 +151,14 @@ public class PoliceSetupActivity extends BaseActivity {
 						if (Utils.requestOk(response)) {
 							Utils.ToastMessage(PoliceSetupActivity.this,
 									"您的配置已经成功");
-
+							mPreferenceUtils.setPush(alarmOption
+									.isAcceptAlarm());
+							mPreferenceUtils.setVoice(alarmOption.isSound());
+							mPreferenceUtils.setShock(alarmOption.isVibration());
 						}
 						super.onSuccess(statusCode, headers, response);
 					}
 				});
-	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		mPreferenceUtils.setPush(alarmOption.isAcceptAlarm());
-		mPreferenceUtils.setVoice(alarmOption.isSound());
-		mPreferenceUtils.setShock(alarmOption.isVibration());
-		super.onPause();
 	}
 
 	@Override

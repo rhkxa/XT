@@ -1,151 +1,196 @@
 package com.gps808.app.activity;
 
-import android.content.Context;
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
+
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.TextView;
+
 import com.gps808.app.R;
+import com.gps808.app.fragment.HeaderFragment;
 import com.gps808.app.utils.BaseActivity;
+import com.gps808.app.utils.CyptoUtils;
+import com.gps808.app.utils.HttpUtil;
+import com.gps808.app.utils.LogUtils;
 import com.gps808.app.utils.StringUtils;
+import com.gps808.app.utils.UrlConfig;
 import com.gps808.app.utils.Utils;
-import com.gps808.app.view.TimeButton;
+import com.gps808.app.view.FancyButton;
 
 public class RegisterActivity extends BaseActivity {
 
-	private EditText username, password, again_password, vercode, jq_code;
-	private Button register;
-	private TimeButton send_code;
-	private Context context;
-	private String code = null;
-	private ImageButton backBtn;
+	private EditText register_phone, register_name, register_user,
+			register_pass, register_imei, register_sim, register_platno;
+	private FancyButton save_ok, register_capture;
+	private TextView register_buy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		context = RegisterActivity.this;
 		init();
+
 	}
 
 	private void init() {
 		// TODO Auto-generated method stub
-		backBtn = (ImageButton) findViewById(R.id.backBtn);
-		backBtn.setOnClickListener(new OnClickListener() {
+		HeaderFragment headerFragment = (HeaderFragment) this
+				.getSupportFragmentManager().findFragmentById(R.id.title);
+		headerFragment.setTitleText("用户注册");
+		register_phone = (EditText) findViewById(R.id.register_phone);
+		register_name = (EditText) findViewById(R.id.register_name);
+		register_user = (EditText) findViewById(R.id.register_user);
+		register_pass = (EditText) findViewById(R.id.register_pass);
+		register_imei = (EditText) findViewById(R.id.register_imei);
+		register_sim = (EditText) findViewById(R.id.register_sim);
+		register_platno = (EditText) findViewById(R.id.register_platno);
+		save_ok = (FancyButton) findViewById(R.id.save_ok);
+		register_capture = (FancyButton) findViewById(R.id.register_capture);
+		register_pass.setKeyListener(inputType);
+		register_user.setKeyListener(inputType);
+		register_imei.setKeyListener(inputType);
+		register_capture.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				finish();
+				Intent intent = new Intent(RegisterActivity.this,
+						CaptureActivity.class);
+				startActivityForResult(intent, 0);
 			}
 		});
-		username = (EditText) findViewById(R.id.username);
-		password = (EditText) findViewById(R.id.password);
-		again_password = (EditText) findViewById(R.id.again_password);
-		vercode = (EditText) findViewById(R.id.vercode);
-		send_code = (TimeButton) findViewById(R.id.send_code);
-		jq_code = (EditText) findViewById(R.id.jq_code);
-
-		register = (Button) findViewById(R.id.register);
-		send_code.setOnClickListener(new OnClickListener() {
+		register_buy = (TextView) findViewById(R.id.register_buy);
+		register_buy.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // 下划线
+		register_buy.getPaint().setAntiAlias(true);// 抗锯齿
+		register_buy.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				if (StringUtils.isEmpty(username.getText().toString())) {
-					Utils.ToastMessage(context, "请填写手机号码");
-					return;
-				}
-				if (!StringUtils.isPhone(username.getText().toString())) {
-					Utils.ToastMessage(context, "手机号码不正确请重新填写");
-					return;
-				}
-				sendCode(username.getText().toString());
+				Utils.toExploer(
+						RegisterActivity.this,
+						"http://mokebao.molink.cn/index.php?g=Wap&m=Index&a=index&token=bldbtc1458693848");
 			}
 		});
-		register.setOnClickListener(new OnClickListener() {
+		save_ok.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				if (StringUtils.isEmpty(username.getText().toString())) {
-					Utils.ToastMessage(context, "请填写手机号码");
+				if (StringUtils.isEmpty(register_phone.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "手机号不能为空");
 					return;
 				}
-				if (!StringUtils.isPhone(username.getText().toString())) {
-					Utils.ToastMessage(context, "手机号码不正确请重新填写");
+				if (StringUtils.isEmpty(register_name.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "名称不能为空");
 					return;
 				}
-				if (StringUtils.isEmpty(password.getText().toString())) {
-					Utils.ToastMessage(context, "请填写密码");
-					return;
-				}
-				if (StringUtils.isEmpty(again_password.getText().toString())) {
-					Utils.ToastMessage(context, "请填写再次输入密码");
-					return;
-				}
-				if (!password.getText().toString()
-						.equals(again_password.getText().toString())) {
-					Utils.ToastMessage(context, "两次密码输入一致请重新输入");
+				if (StringUtils.isEmpty(register_user.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "登录名称不能为空");
 					return;
 				}
 
-				if (StringUtils.isEmpty(vercode.getText().toString())) {
-					Utils.ToastMessage(context, "请填写验证号");
+				if (StringUtils.isEmpty(register_pass.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "密码不能为空");
 					return;
 				}
-				if (!(vercode.getText().toString()).equals(code)) {
-					Utils.ToastMessage(context, "验证号不正确");
+				if (StringUtils.isEmpty(register_imei.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "请输入imei");
 					return;
 				}
-				toRegister(username.getText().toString(), password.getText()
-						.toString(), vercode.getText().toString(), jq_code
-						.getText().toString());
+				if (StringUtils.isEmpty(register_sim.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "请输入sim");
+					return;
+				}
+				if (StringUtils.isEmpty(register_platno.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "请输入车牌号");
+					return;
+				}
+				if (register_pass.length() < 6) {
+					Utils.ToastMessage(RegisterActivity.this, "密码长度最少6位");
+					return;
+				}
+
+				if (!StringUtils.isPhone(register_phone.getText().toString())) {
+					Utils.ToastMessage(RegisterActivity.this, "手机号码不正确,请重新输入");
+					return;
+				}
+				toRregister();
 			}
 		});
 
 	}
 
-	private void sendCode(String mobi) {
-		// HttpUtil.get(UrlConfig.getCaptcha(mobi), new
-		// jsonHttpResponseHandler() {
-		// @Override
-		// public void onSuccess(JSONObject arg0) {
-		// // TODO Auto-generated method stub
-		// if (Utils.requestOk(arg0)) {
-		// BnCaptcha captcha = JSON.parseObject(Utils.getResult(arg0),
-		// BnCaptcha.class);
-		// code = captcha.getCaptcha();
-		// Utils.ToastMessage(context, "验证码发送成功");
-		// send_code.setTextAfter("秒后重新获取").setTextBefore("点击获取验证码")
-		// .setBackgroundResource(R.color.grayslate);
-		// send_code.start();
-		// } else {
-		// if (Utils.getKey(arg0, "code").equals("200104")) {
-		// Utils.ToastMessage(context, Utils.getKey(arg0, "msg"));
-		// }
-		// }
-		// super.onSuccess(arg0);
-		// }
-		// });
+	private DigitsKeyListener inputType = new DigitsKeyListener() {
+		@Override
+		public int getInputType() {
+			return InputType.TYPE_TEXT_VARIATION_PASSWORD;
+		}
+
+		@Override
+		protected char[] getAcceptedChars() {
+			char[] data = getResources().getString(
+					R.string.login_only_can_input).toCharArray();
+			return data;
+		}
+
+	};
+
+	private void toRregister() {
+		String url = UrlConfig.getRegister();
+		StringEntity entity = null;
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject();
+			jsonObject.put("userName", register_name.getText().toString());
+			jsonObject.put("loginName", register_user.getText().toString());
+			jsonObject.put("password",
+					CyptoUtils.MD5(register_pass.getText().toString()));
+			jsonObject.put("phoneNo", register_phone.getText().toString());
+			jsonObject.put("imei", register_imei.getText().toString());
+			jsonObject.put("sim", register_sim.getText().toString());
+			jsonObject.put("plateNo", register_platno.getText().toString());
+			LogUtils.DebugLog("post json", jsonObject.toString());
+			entity = new StringEntity(jsonObject.toString(), "UTF-8");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HttpUtil.post(RegisterActivity.this, url, entity, "application/json",
+				new jsonHttpResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, Header[] headers,
+							JSONObject response) {
+						// TODO Auto-generated method stub
+						if (Utils.requestOk(response)) {
+							Utils.ToastMessage(RegisterActivity.this, "注册成功");
+						} else {
+							Utils.ToastMessage(RegisterActivity.this, Utils
+									.getKey(response, "errorMsg" + "请重新填写"));
+						}
+						super.onSuccess(statusCode, headers, response);
+					}
+				});
 
 	}
 
-	private void toRegister(String name, String word, String code, String promo) {
-		// HttpUtil.get(UrlConfig.getRegister(name, word, code, promo),
-		// new jsonHttpResponseHandler() {
-		// @Override
-		// public void onSuccess(JSONObject arg0) {
-		// // TODO Auto-generated method stub
-		// if (Utils.requestOk(arg0)) {
-		// Utils.ToastMessage(context, "注册成功");
-		// finish();
-		// }
-		// super.onSuccess(arg0);
-		// }
-		// });
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		if (arg0 == 0) {
+			if (arg1 == 1) {
+				register_imei.setText(arg2.getStringExtra("code"));
+			}
+		}
+		super.onActivityResult(arg0, arg1, arg2);
 	}
 }

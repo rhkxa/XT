@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        class="com.gps808.app.fragment.HeaderFragment" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="8dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="设备IMEI号:"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <EditText
+                android:id="@+id/device_imei"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/corners_rect_gray"
+                android:hint="请输入IMEI"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textSize="@dimen/body" />
+
+            <com.gps808.app.view.FancyButton
+                android:id="@+id/device_capture"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:clickable="false"
+                fancy:fb_defaultColor="@color/app_blue"
+                fancy:fb_focusColor="#8cc9f8"
+                fancy:fb_iconResource="@drawable/xtd_icon_carmer"
+                fancy:fb_iconSize="24dp"
+                fancy:fb_radius="2dp"
+                fancy:fb_textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="设备SIM卡号:"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <EditText
+                android:id="@+id/device_sim"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/corners_rect_gray"
+                android:hint="请输入SIM卡号"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textSize="@dimen/body" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="车牌号:"
+                android:textColor="@color/text"
+                android:textSize="@dimen/body" />
+
+            <EditText
+                android:id="@+id/device_platno"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/corners_rect_gray"
+                android:hint="请输入车牌号"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textSize="@dimen/body" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提示:只有定位设备上线，并成功定位后才会在车辆列表显示。"
+                android:textColor="@color/app_pink"
+                android:textSize="@dimen/caption" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.gps808.app.view.FancyButton
+        android:id="@+id/save_ok"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        fancy:fb_defaultColor="@color/app_blue"
+        fancy:fb_focusColor="#8cc9f8"
+        fancy:fb_radius="2dp"
+        fancy:fb_text="确定"
+        fancy:fb_textColor="@color/white" />
+
+</LinearLayout>

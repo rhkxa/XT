@@ -18,7 +18,7 @@ public class UrlConfig {
 
 	// 注册
 	public static final String getRegister() {
-		return SERVER + "register/submit";
+		return SERVER + "login/register";
 	}
 
 	/**
@@ -306,6 +306,9 @@ public class UrlConfig {
 
 	public static final String getAgent() {
 		return SERVER + "user/agentInfo";
+	}
+	public static final String getAddVehicle() {
+		return SERVER + "vehicle/ addVehicle";
 	}
 
 }

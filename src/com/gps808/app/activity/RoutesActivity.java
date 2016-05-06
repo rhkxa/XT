@@ -6,13 +6,10 @@ import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
+
 
 import com.alibaba.fastjson.JSON;
 import com.gps808.app.R;

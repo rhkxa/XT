@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical" >
+
+    <SurfaceView
+        android:id="@+id/capture_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/capture_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/capture_mask_top"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shadow" />
+
+        <RelativeLayout
+            android:id="@+id/capture_crop_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/capture_mask_top"
+            android:layout_centerInParent="true"
+            android:background="@drawable/qr_code_bg" >
+
+            <ImageView
+                android:id="@+id/capture_scan_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/scan_line" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/capture_mask_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/capture_crop_view"
+            android:background="@drawable/shadow" />
+
+        <ImageView
+            android:id="@+id/capture_mask_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/capture_mask_bottom"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/capture_mask_top"
+            android:layout_toLeftOf="@id/capture_crop_view"
+            android:background="@drawable/shadow" />
+
+        <ImageView
+            android:id="@+id/capture_mask_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/capture_mask_bottom"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/capture_mask_top"
+            android:layout_toRightOf="@id/capture_crop_view"
+            android:background="@drawable/shadow" />
+
+        <com.gps808.app.view.FancyButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/capture_crop_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            fancy:fb_defaultColor="@color/gray"
+            fancy:fb_radius="20dp"
+            fancy:fb_text="扫瞄条形码二维码"
+            fancy:fb_textColor="@color/white"
+            fancy:fb_textSize="@dimen/caption" />
+    </RelativeLayout>
+
+    <com.gps808.app.view.FancyButton
+        android:id="@+id/back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        fancy:fb_borderColor="@color/graywhite"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/half_transparent"
+        fancy:fb_iconResource="@drawable/xtd_action_back"
+        fancy:fb_iconSize="24dp"
+        fancy:fb_radius="50dp"
+        fancy:fb_textColor="@color/text" />
+
+</RelativeLayout>

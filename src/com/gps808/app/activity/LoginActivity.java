@@ -132,10 +132,14 @@ public class LoginActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				String showStr = "1、安装我公司的车辆定位设备，将免费使用该应用。<br>2、购买、安装设备请与我们联系，联系电话：0317-4227916。";
-				CustomOkDialog register = new CustomOkDialog(
-						LoginActivity.this, "新用户", showStr, null);
-				register.show();
+				// String showStr =
+				// "1、安装我公司的车辆定位设备，将免费使用该应用。<br>2、购买、安装设备请与我们联系，联系电话：0317-4227916。";
+				// CustomOkDialog register = new CustomOkDialog(
+				// LoginActivity.this, "新用户", showStr, null);
+				// register.show();
+				Intent intent = new Intent(LoginActivity.this,
+						RegisterActivity.class);
+				startActivity(intent);
 			}
 		});
 		login_forget_pass.setOnClickListener(new OnClickListener() {

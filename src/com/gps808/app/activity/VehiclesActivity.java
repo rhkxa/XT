@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -71,6 +72,17 @@ public class VehiclesActivity extends BaseActivity {
 		headerFragment = (HeaderFragment) this.getSupportFragmentManager()
 				.findFragmentById(R.id.title);
 		headerFragment.setTitleText("车辆列表");
+		headerFragment.setImageButtonResource(R.drawable.xtd_icon_add);
+		headerFragment.setCommentBtnListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(VehiclesActivity.this,
+						DeviceAddActivity.class);
+				startActivity(intent);
+			}
+		});
 		SearchFragment searchFragment = (SearchFragment) this
 				.getSupportFragmentManager().findFragmentById(R.id.search_bar);
 		searchFragment.setOnSearchClickListener(new OnSearchClickListener() {

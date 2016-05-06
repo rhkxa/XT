@@ -14,9 +14,8 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true" />
-    
-    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
 
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
     <uses-permission android:name="android.permission.ACCES_MOCK_LOCATION" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -27,16 +26,11 @@
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <!-- 来电消音 -->
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- 摄影机 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    
-    
-    
-    
-    
+
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
     </uses-permission>
@@ -69,7 +63,6 @@
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
- 
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -92,7 +85,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gps808.app.activity.LoginActivity" />
-        <activity android:name="com.gps808.app.activity.RegisterActivity" />
+        <activity
+            android:name="com.gps808.app.activity.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
         <activity android:name="com.gps808.app.activity.MainActivity" >
         </activity>
         <activity android:name="com.gps808.app.activity.AboutActivity" >
@@ -131,6 +127,8 @@
         <activity android:name="com.gps808.app.activity.ShowMapActivity" />
         <activity android:name="com.gps808.app.activity.AgentInfoActivity" />
         <activity android:name="com.gps808.app.activity.JoinUsActivity" />
+        <activity android:name="com.gps808.app.activity.CaptureActivity" />
+        <activity android:name="com.gps808.app.activity.DeviceAddActivity" />
 
         <service android:name="com.gps808.app.timeout.TimeoutService" >
         </service>
@@ -247,7 +245,7 @@
         <meta-data
             android:name="api_key"
             android:value="89W8c1mbtaA2qLGMBXDoTtoU" />
-        <!-- 公司测试N8qQtsf1z2QZUtB6ViQegOWH    89W8c1mbtaA2qLGMBXDoTtoU-->
+        <!-- 公司测试N8qQtsf1z2QZUtB6ViQegOWH    89W8c1mbtaA2qLGMBXDoTtoU -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="89W8c1mbtaA2qLGMBXDoTtoU" />
@@ -257,9 +255,9 @@
         <meta-data
             android:name="TD_CHANNEL_ID"
             android:value="yilutong" />
-          <meta-data
+        <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="ccb35622a01ca4ecc12f7d113eb96871"/>
+            android:value="ccb35622a01ca4ecc12f7d113eb96871" />
     </application>
 
 </manifest>
