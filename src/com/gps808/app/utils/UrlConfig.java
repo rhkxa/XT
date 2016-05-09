@@ -307,8 +307,9 @@ public class UrlConfig {
 	public static final String getAgent() {
 		return SERVER + "user/agentInfo";
 	}
+
 	public static final String getAddVehicle() {
-		return SERVER + "vehicle/ addVehicle";
+		return SERVER + "vehicle/addVehicle";
 	}
 
 }

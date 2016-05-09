@@ -86,10 +86,7 @@ public class RegisterActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				if (StringUtils.isEmpty(register_phone.getText().toString())) {
-					Utils.ToastMessage(RegisterActivity.this, "手机号不能为空");
-					return;
-				}
+
 				if (StringUtils.isEmpty(register_name.getText().toString())) {
 					Utils.ToastMessage(RegisterActivity.this, "名称不能为空");
 					return;
@@ -107,23 +104,29 @@ public class RegisterActivity extends BaseActivity {
 					Utils.ToastMessage(RegisterActivity.this, "请输入imei");
 					return;
 				}
-				if (StringUtils.isEmpty(register_sim.getText().toString())) {
-					Utils.ToastMessage(RegisterActivity.this, "请输入sim");
-					return;
-				}
-				if (StringUtils.isEmpty(register_platno.getText().toString())) {
-					Utils.ToastMessage(RegisterActivity.this, "请输入车牌号");
-					return;
-				}
+				// if (StringUtils.isEmpty(register_sim.getText().toString())) {
+				// Utils.ToastMessage(RegisterActivity.this, "请输入sim");
+				// return;
+				// }
+				// if
+				// (StringUtils.isEmpty(register_platno.getText().toString())) {
+				// Utils.ToastMessage(RegisterActivity.this, "请输入车牌号");
+				// return;
+				// }
 				if (register_pass.length() < 6) {
 					Utils.ToastMessage(RegisterActivity.this, "密码长度最少6位");
 					return;
 				}
-
-				if (!StringUtils.isPhone(register_phone.getText().toString())) {
-					Utils.ToastMessage(RegisterActivity.this, "手机号码不正确,请重新输入");
-					return;
-				}
+				// if (StringUtils.isEmpty(register_phone.getText().toString()))
+				// {
+				// Utils.ToastMessage(RegisterActivity.this, "手机号不能为空");
+				// return;
+				// }
+				// if
+				// (!StringUtils.isPhone(register_phone.getText().toString())) {
+				// Utils.ToastMessage(RegisterActivity.this, "手机号码不正确,请重新输入");
+				// return;
+				// }
 				toRregister();
 			}
 		});
@@ -173,9 +176,16 @@ public class RegisterActivity extends BaseActivity {
 						// TODO Auto-generated method stub
 						if (Utils.requestOk(response)) {
 							Utils.ToastMessage(RegisterActivity.this, "注册成功");
+							Intent intent = new Intent();
+							intent.putExtra("user", register_user.getText()
+									.toString());
+							intent.putExtra("pass", register_pass.getText()
+									.toString());
+							setResult(1);
+							finish();
 						} else {
-							Utils.ToastMessage(RegisterActivity.this, Utils
-									.getKey(response, "errorMsg" + "请重新填写"));
+							Utils.ToastMessage(RegisterActivity.this,
+									Utils.getKey(response, "errorMsg"));
 						}
 						super.onSuccess(statusCode, headers, response);
 					}

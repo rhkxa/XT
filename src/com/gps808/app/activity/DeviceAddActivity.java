@@ -126,7 +126,7 @@ public class DeviceAddActivity extends BaseActivity {
 							Utils.ToastMessage(DeviceAddActivity.this, "添加成功");
 						} else {
 							Utils.ToastMessage(DeviceAddActivity.this, Utils
-									.getKey(response, "errorMsg" + "请重新填写"));
+									.getKey(response, "errorMsg"));
 						}
 						super.onSuccess(statusCode, headers, response);
 					}

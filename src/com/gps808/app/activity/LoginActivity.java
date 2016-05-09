@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity {
 				// register.show();
 				Intent intent = new Intent(LoginActivity.this,
 						RegisterActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 0);
 			}
 		});
 		login_forget_pass.setOnClickListener(new OnClickListener() {
@@ -260,6 +260,19 @@ public class LoginActivity extends BaseActivity {
 			UrlConfig.SERVER = gps;
 		}
 
+	}
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		if (arg0 == 0) {
+			if (arg1 == 1) {
+				userName.setText(arg2.getStringExtra("user"));
+				passWord.setText(arg2.getStringExtra("pass"));
+				login.performClick();
+			}
+		}
+		super.onActivityResult(arg0, arg1, arg2);
 	}
 
 	// 登录

@@ -36,7 +36,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="用户名称:"
+                    android:text="用户名称:(必填)"
                     android:textColor="@color/text"
                     android:textSize="@dimen/body" />
 
@@ -63,7 +63,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="登录帐号:"
+                    android:text="登录帐号:(必填)"
                     android:textColor="@color/text"
                     android:textSize="@dimen/body" />
 
@@ -90,7 +90,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="登录密码:"
+                    android:text="登录密码:(必填)"
                     android:textColor="@color/text"
                     android:textSize="@dimen/body" />
 
@@ -117,7 +117,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="设备IMEI号:"
+                    android:text="设备IMEI:(必填)"
                     android:textColor="@color/text"
                     android:textSize="@dimen/body" />
 
@@ -238,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:text="提示:登陆帐号建议使用手机号码！"
                     android:textColor="@color/app_pink"
-                    android:textSize="@dimen/caption" />
+                    android:textSize="@dimen/body" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -249,7 +249,7 @@
                         android:layout_height="wrap_content"
                         android:text="只有购买我公司的设备才可以注册,"
                         android:textColor="@color/app_pink"
-                        android:textSize="@dimen/caption" />
+                        android:textSize="@dimen/body" />
 
                     <TextView
                         android:id="@+id/register_buy"
@@ -257,7 +257,7 @@
                         android:layout_height="wrap_content"
                         android:text="在线购买"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/caption" />
+                        android:textSize="@dimen/body" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
