@@ -236,7 +236,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="提示:登陆帐号建议使用手机号码！"
+                    android:text="提示:"
+                    android:textColor="@color/app_pink"
+                    android:textSize="@dimen/body" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.登陆帐号建议使用手机号码！"
                     android:textColor="@color/app_pink"
                     android:textSize="@dimen/body" />
 
@@ -247,7 +254,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="只有购买我公司的设备才可以注册,"
+                        android:text="2.只有购买我公司的设备才可以注册,"
                         android:textColor="@color/app_pink"
                         android:textSize="@dimen/body" />
 
@@ -257,7 +264,7 @@
                         android:layout_height="wrap_content"
                         android:text="在线购买"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/body" />
+                        android:textSize="@dimen/subhead" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -71,14 +71,15 @@ public class DeviceAddActivity extends BaseActivity {
 					Utils.ToastMessage(DeviceAddActivity.this, "请输入imei");
 					return;
 				}
-				if (StringUtils.isEmpty(device_sim.getText().toString())) {
-					Utils.ToastMessage(DeviceAddActivity.this, "请输入sim");
-					return;
-				}
-				if (StringUtils.isEmpty(device_platno.getText().toString())) {
-					Utils.ToastMessage(DeviceAddActivity.this, "请输入车牌号");
-					return;
-				}
+				// if (StringUtils.isEmpty(device_sim.getText().toString())) {
+				// Utils.ToastMessage(DeviceAddActivity.this, "请输入sim");
+				// return;
+				// }
+				// if (StringUtils.isEmpty(device_platno.getText().toString()))
+				// {
+				// Utils.ToastMessage(DeviceAddActivity.this, "请输入车牌号");
+				// return;
+				// }
 
 				toAdd();
 			}

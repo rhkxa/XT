@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".activity.DeviceAddActivity" >
 
     <fragment
         android:id="@+id/title"
@@ -121,7 +123,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="提示:只有定位设备上线，并成功定位后才会在车辆列表显示。"
+                android:text="提示:"
+                android:textColor="@color/app_pink"
+                android:textSize="@dimen/caption" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.只有定位设备上线，并成功定位后才会在车辆列表显示。"
+                android:textColor="@color/app_pink"
+                android:textSize="@dimen/caption" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.如果新增成功后，不能在列表显示，请重新登录"
                 android:textColor="@color/app_pink"
                 android:textSize="@dimen/caption" />
         </LinearLayout>
