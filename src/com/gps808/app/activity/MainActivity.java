@@ -444,14 +444,14 @@ public class MainActivity extends BaseActivity {
 						+ xbVehicle.getSpeed() + "km/h");
 			} else {
 				viewHolder.popwindows_state.setText("停车中("
-						+ StringUtils.date_interval(xbVehicle.getTime())+")");
+						+ StringUtils.date_interval(xbVehicle.getTime()) + ")");
 			}
 
 			viewHolder.popwindows_state.setTextColor(getResources().getColor(
 					R.color.app_green));
 		} else {
 			viewHolder.popwindows_state.setText("离线("
-					+ StringUtils.date_interval(xbVehicle.getTime())+")");
+					+ StringUtils.date_interval(xbVehicle.getTime()) + ")");
 			viewHolder.popwindows_state.setTextColor(getResources().getColor(
 					R.color.text));
 		}
@@ -593,6 +593,9 @@ public class MainActivity extends BaseActivity {
 
 	private void showInfowindow() {
 		int markerPosition = loadMarkerPosition(mCurrentCar);
+		if (markerPosition == -1) {
+			return;
+		}
 		XbVehicle xbVehicle = JSON.parseObject(markerList.get(markerPosition)
 				.getExtraInfo().getString("info"), XbVehicle.class);
 		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(markerList.get(

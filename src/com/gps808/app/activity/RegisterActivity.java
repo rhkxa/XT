@@ -181,7 +181,7 @@ public class RegisterActivity extends BaseActivity {
 									.toString());
 							intent.putExtra("pass", register_pass.getText()
 									.toString());
-							setResult(1);
+							setResult(1, intent);
 							finish();
 						} else {
 							Utils.ToastMessage(RegisterActivity.this,

@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.gps808.app.R;
 import com.gps808.app.activity.DisplayLineActivity;
-import com.gps808.app.activity.RoutesActivity;
 import com.gps808.app.models.RoutesInfo;
-import com.gps808.app.utils.LogUtils;
 import com.gps808.app.view.FancyButton;
 
 import android.content.Context;
@@ -26,7 +24,7 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	public RoutesExpandableListAdapter(Context mContext,
 			List<RoutesInfo> datalist) {
 		this.mContext = mContext;
-		this.datalist = datalist;
+		this.datalist = datalist; 
 	}
 
 	@Override
@@ -42,8 +40,8 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(final int arg0, final int arg1, boolean arg2, View arg3,
-			ViewGroup arg4) {
+	public View getChildView(final int arg0, final int arg1, boolean arg2,
+			View arg3, ViewGroup arg4) {
 		// TODO Auto-generated method stub
 		ChildViewHolder vh;
 		if (arg3 == null) {
@@ -67,14 +65,13 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 		vh.item_routes_end.setText(datalist.get(arg0).getSub().get(arg1)
 				.getEndPlace());
 		arg3.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View view) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(mContext,
-						DisplayLineActivity.class);
-				intent.putExtra("rid",
-						datalist.get(arg0).getSub().get(arg1).getRid());
+				Intent intent = new Intent(mContext, DisplayLineActivity.class);
+				intent.putExtra("rid", datalist.get(arg0).getSub().get(arg1)
+						.getRid());
 				mContext.startActivity(intent);
 			}
 		});
@@ -86,11 +83,10 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public int getChildrenCount(int arg0) {
 		// TODO Auto-generated method stub
-		if (datalist.get(arg0).getSub() == null) {
-			return 0;
-		} else {
+		if (datalist.get(arg0).getSub() != null) {
 			return datalist.get(arg0).getSub().size();
 		}
+		return 0;
 	}
 
 	@Override
@@ -102,7 +98,10 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public int getGroupCount() {
 		// TODO Auto-generated method stub
-		return datalist.size();
+		if (datalist != null) {
+			return datalist.size();
+		}
+		return 0;
 	}
 
 	@Override
@@ -112,11 +111,11 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getGroupView(int arg0, boolean arg1, View arg2, ViewGroup arg3) {
+	public View getGroupView(final int arg0, boolean arg1, View arg2,
+			ViewGroup arg3) {
 		// TODO Auto-generated method stub
 		GroupViewHolder vh;
 		if (arg2 == null) {
-
 			arg2 = LayoutInflater.from(mContext).inflate(
 					R.layout.item_routes_group, null);
 			vh = new GroupViewHolder(arg2);
@@ -131,9 +130,7 @@ public class RoutesExpandableListAdapter extends BaseExpandableListAdapter {
 			vh.item_routes_group_ivExpande
 					.setImageResource(R.drawable.ssdk_recomm_plats_more);
 		}
-
 		vh.item_routes_group_name.setText(datalist.get(arg0).getGroupName());
-
 		return arg2;
 
 	}

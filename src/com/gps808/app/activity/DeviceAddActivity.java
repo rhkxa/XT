@@ -124,9 +124,11 @@ public class DeviceAddActivity extends BaseActivity {
 						// TODO Auto-generated method stub
 						if (Utils.requestOk(response)) {
 							Utils.ToastMessage(DeviceAddActivity.this, "添加成功");
+							setResult(1);
+							finish();
 						} else {
-							Utils.ToastMessage(DeviceAddActivity.this, Utils
-									.getKey(response, "errorMsg"));
+							Utils.ToastMessage(DeviceAddActivity.this,
+									Utils.getKey(response, "errorMsg"));
 						}
 						super.onSuccess(statusCode, headers, response);
 					}

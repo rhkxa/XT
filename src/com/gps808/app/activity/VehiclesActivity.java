@@ -80,7 +80,7 @@ public class VehiclesActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(VehiclesActivity.this,
 						DeviceAddActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 0);
 			}
 		});
 		SearchFragment searchFragment = (SearchFragment) this
@@ -232,6 +232,17 @@ public class VehiclesActivity extends BaseActivity {
 				offVehicles.add(info);
 			}
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		if(arg0==0){
+			if(arg1==1){
+				getData(true);
+			}
+		}
+		super.onActivityResult(arg0, arg1, arg2);
 	}
 
 }
